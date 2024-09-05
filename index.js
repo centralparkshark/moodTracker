@@ -27,7 +27,7 @@ app.use(express.static(__dirname + '/public'));
 app.get("/", (req, res) => {
     const options = {
         title: "Home",
-        items: [{title: "Click a link below."}],
+        items: [],
     };
     res.render("data", options)
 });

@@ -2,30 +2,20 @@ const journal = [
     {
       id: 1,
       userId: 1, 
-      mood: [
+      mood: 
         {
             moodId: 1,
-            rating: 2,
-        },
-        {
-            moodId: 3,
-            rating: 4,
-        },
-    ]
+            note: "I got an A on my test!"
+        }
     },
     {
         id: 2,
         userId: 1, 
-        mood: [
+        mood: 
           {
-              moodId: 1,
-              rating: 2,
-          },
-          {
-              moodId: 3,
-              rating: 4,
-          },
-      ]
+              moodId: 2,
+              note: "I forgot to turn in my assignment",
+          }
       },
   ];
   
