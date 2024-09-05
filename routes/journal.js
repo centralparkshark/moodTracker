@@ -5,6 +5,7 @@ const journal = require("../data/journal");
 const moods = require("../data/moods");
 const users = require("../data/users");
 const error = require("../views/error");
+const { route } = require("./moods");
 
 router
     .route("/")
@@ -38,6 +39,13 @@ router
 //       res.json(users[users.length - 1]);
 //     } else next(error(400, "Insufficient Data"));
 //   });
-
+router
+  .route('/new')
+  .get((req, res) => {
+    res.render("newEntry")
+  })
+  .post((req, res) => {
+    res.redirect('/journal')
+  })
 
 module.exports = router;
