@@ -64,8 +64,8 @@ app.listen(port, () => {
 // [ ] query parameters for data filtering (at least 1)
 // [ ] route parameters
 // [ ] adhere to REST
-// [ ] at least 1 view using view template and template engine
-// [ ] simple css w/ static file using express
+// [x] at least 1 view using view template and template engine
+// [x] simple css w/ static file using express
 // [ ] form that allows interaction 
 // [ ] reasonable code organization practices
 // [ ] runs without error

@@ -45,21 +45,25 @@ router
 //     } else next(error(400, "Insufficient Data"));
 //   });
 router
-    .route("/:id")
-    .get((req, res, next) => {
-        const moodPosts = journal.filter((j) => j.mood.moodId == req.params.id)
-        let mood = moods.find((m) => m.id == req.params.id).name
+    .route("/:name")
+    .get((req, res, next) => { 
+        let mood = moods.find((m) => m.name.toLowerCase() == req.params.name)
+        const moodPosts = journal.filter((j) => j.mood.moodId == mood.id)
 
         let formattedPosts = []
         
         moodPosts.forEach(post => {
           let user = users.find((u) => u.id == post.userId)
           let note = post.mood.note;
-          formattedPosts.push({user: user, mood: mood.toLowerCase(), note: note})
+          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), note: note})
         });
 
-        if (formattedPosts) res.render("journal", {title: mood, items: formattedPosts})
+        if (formattedPosts) res.render("journal", {title: mood.name, items: formattedPosts})
         else next();
+});
+
+router.use((req, res, next) => {
+  next(error(404, "Resource Not Found")); // could render 404 page
 });
 
 module.exports = router;
