@@ -9,6 +9,7 @@
 /moods -> Shows all moods
 /moods/:id -> Shows all journal entries that match that mood
 
+## Journal
 /journal -> Shows all journal entries
 
 In an ideal world, I would add ability to filter by user and mood.
