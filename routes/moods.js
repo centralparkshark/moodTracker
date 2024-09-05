@@ -48,17 +48,17 @@ router
     .route("/:id")
     .get((req, res, next) => {
         const moodPosts = journal.filter((j) => j.mood.moodId == req.params.id)
-        
+        let mood = moods.find((m) => m.id == req.params.id).name
+
         let formattedPosts = []
         
         moodPosts.forEach(post => {
           let user = users.find((u) => u.id == post.userId)
-          let mood = moods.find((m) => m.id == post.mood.moodId)
           let note = post.mood.note;
-          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), note: note})
+          formattedPosts.push({user: user, mood: mood.toLowerCase(), note: note})
         });
 
-        if (formattedPosts) res.render("journal", {title: "Happy", items: formattedPosts})
+        if (formattedPosts) res.render("journal", {title: mood, items: formattedPosts})
         else next();
 });
 

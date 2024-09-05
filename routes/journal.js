@@ -2,26 +2,25 @@ const express = require("express");
 const router = express.Router();
 
 const journal = require("../data/journal");
+const moods = require("../data/moods");
+const users = require("../data/users");
 const error = require("../views/error");
 
-// app.get("/users/:id", (req, res) => {
-//     res.send("User:");
-// });
-
-
 router
-  .route("/")
-  .get((req, res) => {
-    const links = [
-      {
-        href: "journal/:id",
-        rel: ":id",
-        type: "GET",
-      },
-    ];
+    .route("/")
+    .get((req, res, next) => {
+        let formattedPosts = []
+        
+        journal.forEach(post => {
+          let user = users.find((u) => u.id == post.userId)
+          let mood = moods.find((m) => m.id == post.mood.moodId)
+          let note = post.mood.note;
+          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), note: note})
+        });
 
-    res.json({ journal, links });
-  })
+        if (formattedPosts) res.render("journal", {title: "", items: formattedPosts})
+        else next();
+});
 //   .post((req, res, next) => {
 //     if (req.body.name && req.body.username && req.body.email) {
 //       if (users.find((u) => u.username == req.body.username)) {
