@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account</title>
+    <link rel="stylesheet" type="text/css" href="../style.css" />
+</head>
+<body>
+    <div>
+        <h1>Account</h1>
+        <div class="container">
+            <div class="item">
+                <img src="<%= user.img %>" alt="">
+                <div class="info">
+                    <h2>Name: <%= user.name %></h2>
+                    <p>Username: <%= user.username %></p>
+                    <p>Email: <%= user.email %></p>
+                    <button>Edit Info</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="/users">Users</a>
+        <a href="/moods">Moods</a>
+        <a href="/journal">Journal</a>
+    </footer>
+</body>
+</html>

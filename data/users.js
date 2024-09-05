@@ -1,21 +1,24 @@
 const users = [
     {
       id: 1,
-      name: "Carey",
-      username: "cyare23",
-      email: "cy23@example.com",
+      name: "Stephen Carter",
+      username: "yellowpeacock117",
+      email: "stephen.carter3@example.com",
+      img: "https://randomuser.me/api/portraits/men/12.jpg",
     },
     {
       id: 2,
-      name: "Mikoto",
-      username: "Miiko",
-      email: "mikoto_u@example.com",
+      name: "Alma King",
+      username: "alma_king",
+      email: "kinga@example.com",
+      img: "https://randomuser.me/api/portraits/women/12.jpg",
     },
     {
       id: 3,
-      name: "Ronald",
-      username: "RonRonRon",
-      email: "mronald@example.com",
+      name: "Jimmy Rodriquez",
+      username: "jimro",
+      email: "mrjimmy4@example.com",
+      img: "https://randomuser.me/api/portraits/men/22.jpg",
     },
   ];
   

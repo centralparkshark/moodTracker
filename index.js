@@ -7,11 +7,46 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+let ejs = require('ejs');
+app.set("views", "./views")
+app.set("view engine", "ejs")
+
+const bodyParser = require("body-parser");
+
+const users = require("./routes/users");
+const moods = require("./routes/moods");
+const journal = require("./routes/journal");
+
+const error = require("./views/error");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
+
+app.use(express.static(__dirname + '/public'));
 
 app.get("/", (req, res) => {
-        res.send("Hello Express!");
-    });
+    const options = {
+        title: "Home",
+        items: [{title: "Click a link below."}],
+    };
+    res.render("data", options)
+});
 
+// Use Routes
+app.use("/users", users);
+app.use("/moods", moods);
+app.use("/journal", journal);
+
+
+// Error Handling
+app.use((req, res, next) => {
+        next(error(404, "Resource Not Found")); // could render 404 page
+      });
+
+app.use((err, req, res, next) => {
+        res.status(err.status || 500);
+        res.json({ error: err.message });
+      });
 
 app.listen(port, () => {
     console.log("Server started.")
@@ -19,10 +54,10 @@ app.listen(port, () => {
 
 // TO-DO:
 // [ ] two pieces of custom middleware
-// [ ] error handling middleware
-// [ ] 3 different data categories (eg users, post, comments)
-// [ ] reasonable data structuring practices
-// [ ] get routes for all data exposed to cleint
+// [x] error handling middleware
+// [x] 3 different data categories (eg users, post, comments)
+// [x] reasonable data structuring practices
+// [ ] get routes for all data exposed to client
 // [ ] post routes as appropriate (at least one data category)
 // [ ] patch/put (at least 1)
 // [ ] delete (at least 1)

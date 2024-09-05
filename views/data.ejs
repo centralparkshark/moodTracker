@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="../style.css" />
+</head>
+<body>
+    <div>
+        <h1><%= title %></h1>
+        <div class="container">
+            <% items.forEach(function(item) { %>
+                <a href="./<%= item.id %>"><div class="item">
+                    <img src="<%= item.img %>" alt="">
+                    <div class="info">
+                        <h2><%= item.name %></h2>
+                        <p><%= item.username %></p>
+                        <p><%= item.description %></p>
+                    </div>
+                </div></a>
+            <% }); %>
+        </div>
+    </div>
+    <footer>
+        <a href="/users">Users</a>
+        <a href="/moods">Moods</a>
+        <a href="/journal">Journal</a>
+    </footer>
+</body>
+</html>
