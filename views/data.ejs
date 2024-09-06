@@ -7,6 +7,11 @@
     <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
+    <header>
+        <a href="/users">Users</a>
+        <a href="/moods">Moods</a>
+        <a href="/journal">Journal</a>
+    </header>
     <div class="main">
         <h1><%= title %></h1>
         <div class="container">
@@ -20,14 +25,10 @@
                     </div>
                 </div></a>
             <% })} else { %>
-                <h2 style="text-align: center;">Click Link Below</h2>
+                <h2 style="text-align: center;">Click Link Above</h2>
                 <% }; %>
         </div>
     </div>
-    <footer>
-        <a href="/users">Users</a>
-        <a href="/moods">Moods</a>
-        <a href="/journal">Journal</a>
-    </footer>
+    
 </body>
 </html>
