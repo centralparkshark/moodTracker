@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const journal = require("../data/journal");
+let journal = require("../data/journal");
 const moods = require("../data/moods");
 const users = require("../data/users");
 const error = require("../views/error");

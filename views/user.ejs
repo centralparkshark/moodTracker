@@ -21,11 +21,26 @@
                     <h2>Name: <%= user.name %></h2>
                     <p>Username: <%= user.username %></p>
                     <p>Email: <%= user.email %></p>
-                    <button>Edit Info</button>
+                    <button class="editInfo" onclick="editUser(<%= user.id %>)"></button>>Edit Info</button>
                 </div>
             </div>
         </div>
     </div>
-   
+    <script>
+        function editUser(userId) {
+            fetch(`/users/${userId}`, {
+                method: 'PATCH',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // change dom
+                } else {
+                    console.error('Failed to edit user');
+                }
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
 </body>
 </html>
