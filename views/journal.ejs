@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %> Journal</title>
     <link rel="stylesheet" type="text/css" href="../style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
@@ -17,18 +18,38 @@
         <a href="/journal/new"><button>New Entry</button></a>
         <div class="container">
             <% if (items.length > 0) {items.forEach(function(item) { %>
-                <div class="item">
+                <div class="item" id="<%= item.post.id %>">
                     <img src="<%= item.user.img %>" alt="">
                     <div class="info">
                         <p class="heading"><b><%= item.user.username %></b> is feeling <%= item.mood %>.</p>
-                        <p><%= item.note %></p>
+                        <p><%= item.post.mood.note %></p>
                     </div>
+                    <button class=" deleteBtn" onclick="deleteUser(<%= item.post.id %>)"><i class="fa fa-trash" style="color: white;"></i></button>
                 </div>
             <% })} else { %>
                 <h2 style="text-align: center;">No Entries Found</h2>
                 <% }; %>
         </div>
     </div>
-    
+    <script>
+        function deleteUser(itemId) {
+            fetch(`/journal/${itemId}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Find and remove the list item from the DOM
+                    const item = document.querySelector(`div[id="${itemId}"]`);
+                    if (item) {
+                    item.remove();
+                    }
+                } else {
+                    console.error('Failed to delete item');
+                }
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
 </body>
 </html>

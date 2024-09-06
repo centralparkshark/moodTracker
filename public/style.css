@@ -38,6 +38,7 @@ h1, header {
 
 .item>.info {
     padding: 10px;
+    width: 100%;
 }
 
 .item>.info>* {
@@ -89,4 +90,8 @@ button {
 button:hover {
     cursor: pointer;
     background-color: rgb(29, 111, 134);
+}
+
+.deleteBtn {
+    align-self: flex-end;
 }

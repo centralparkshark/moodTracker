@@ -15,8 +15,7 @@ router
         journal.forEach(post => {
           let user = users.find((u) => u.id == post.userId)
           let mood = moods.find((m) => m.id == post.mood.moodId)
-          let note = post.mood.note;
-          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), note: note})
+          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), post: post})
         });
 
         if (formattedPosts) res.render("journal", {title: "", items: formattedPosts})
@@ -65,5 +64,25 @@ router
         journal.push(journalEntry);
     res.redirect('/journal')
   })
+
+  router
+    .route("/:postId")
+    .get((req, res, next) => {
+        let entry = []
+        let post = journal.find((p) => p.id == req.params.postId)
+        let user = users.find((u) => u.id == post.userId)
+        let mood = moods.find((m) => m.id == post.mood.moodId)
+        entry.push({user: user, mood: mood.name.toLowerCase(), post: post})
+        
+        if (post) res.render("journal", {title: "", items: entry})
+          else next();  
+      
+      })
+    .delete((req, res, next) => {
+        journal = journal.filter(entry => entry.id != req.params.postId)
+        res.json({ success: true });
+    })
+
+        
 
 module.exports = router;
