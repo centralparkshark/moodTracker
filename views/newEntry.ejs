@@ -11,11 +11,13 @@
         <h1>New Entry</h1>
         <div class="container">
             <form action="" method="post" class="item form">
+                <label for="userId">Select user account:</label>
+                <select name="userId" id="userId">
+                    <%- userSelect %>
+                </select>
                 <label for="mood">Select your mood:</label>
                 <select name="mood" id="mood">
-                    <option value="happy">Happy</option>
-                    <option value="sad">Sad</option>
-                    <option value="angry">Angry</option>
+                    <%- moodSelect %>
                 </select>
                 <label for="note">Note:</label>
                 <input type="text" name="note" id="note">

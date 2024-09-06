@@ -7,8 +7,9 @@
     <link rel="stylesheet" type="text/css" href="../style.css" />
 </head>
 <body>
-    <div>
+    <div class="main">
         <h1><%= title %> Journal Entries</h1>
+        <a href="/journal/new"><button>New Entry</button></a>
         <div class="container">
             <% if (items.length > 0) {items.forEach(function(item) { %>
                 <div class="item">

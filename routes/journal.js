@@ -42,9 +42,27 @@ router
 router
   .route('/new')
   .get((req, res) => {
-    res.render("newEntry")
+    let userSelect = ""
+    users.forEach(user => {
+      userSelect += `<option value="${user.id}">${user.username}</option>`
+    });
+    let moodSelect = ""
+    moods.forEach(mood => {
+      moodSelect += `<option value="${mood.id}">${mood.name}</option>`
+    });
+
+    res.render("newEntry", {userSelect, moodSelect})
   })
   .post((req, res) => {
+        const journalEntry = {
+          id: journal[journal.length - 1].id + 1,
+          userId: req.body.userId,
+          mood: {
+            moodId: req.body.mood,
+            note: req.body.note
+          }
+        };
+        journal.push(journalEntry);
     res.redirect('/journal')
   })
 
