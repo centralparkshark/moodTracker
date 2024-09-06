@@ -76,3 +76,5 @@ app.listen(port, () => {
 // bonus:
 // [ ] practical usage of regex in route path
 // [ ] use one new third party node package 
+
+module.exports = app;
