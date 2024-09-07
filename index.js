@@ -59,19 +59,19 @@ app.listen(port, () => {
 // [x] reasonable data structuring practices
 // [ ] get routes for all data exposed to client
 // [ ] post routes as appropriate (at least one data category)
-// [ ] patch/put (at least 1)
-// [ ] delete (at least 1)
+// [x] patch/put (at least 1)
+// [x] delete (at least 1)
 // [ ] query parameters for data filtering (at least 1)
 // [ ] route parameters
 // [ ] adhere to REST
 // [x] at least 1 view using view template and template engine
 // [x] simple css w/ static file using express
-// [ ] form that allows interaction 
-// [ ] reasonable code organization practices
-// [ ] runs without error
-// [ ] commit frequently
-// [ ] readme
-// [ ] level of effort
+// [x] form that allows interaction 
+// [x] reasonable code organization practices
+// [x] runs without error
+// [x] commit frequently
+// [x] readme
+// [x] level of effort
 
 // bonus:
 // [ ] practical usage of regex in route path

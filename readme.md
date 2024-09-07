@@ -1,15 +1,19 @@
 
 ## Users
-/users -> Shows all users
-/users/:id -> Shows user data for specific user
+GET /users -> Shows all users
+GET /users/?username=-> Shows user data for specific user
+
+PATCH /users/:id -> Allows for the change of username (pre-specified in this version)
 
 ## Moods
-/moods -> Shows all moods
-/moods/:name -> Shows all journal entries that match that mood
+GET /moods -> Shows all moods
 
 ## Journal
-/journal -> Shows all journal entries
-/journal/new -> Allows the creation of a new entry 
-/journal/?username -> Shows all of a specific user's posts
+GET /journal -> Shows all journal entries
+GET /journal/:id -> Shows specific journal entry
+GET /journal?mood= -> Shows all journal entries that match that mood
+GET /journal?username= -> Shows all of a specific user's posts
 
-In an ideal world, I would add ability to filter by user and mood.
+DELETE /journal/:id -> Delete specific journal entry
+POST /journal/new -> Allows the creation of a new entry 
+

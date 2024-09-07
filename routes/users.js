@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const bodyParser = require('body-parser');
 
 const users = require("../data/users");
 const error = require("../views/error");
+const e = require("express");
+
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
 
 router
   .route("/")
@@ -14,7 +19,12 @@ router
         type: "GET",
       },
     ];
-    res.render("data", {title: "Users", items: users})
+    if (req.query.username) {
+      const user = users.find((u) => u.username == req.query.username)
+      if (user) res.render("user", {user: user}) 
+    } else {
+      res.render("data", {title: "Users", items: users})
+    }
   })
 
 router
@@ -25,7 +35,11 @@ router
         else next();
     })
     .patch((req, res, next) => {
-      const user = users.find((u) => u.id == req.params.id) 
+      if (req.query.username) {
+        const user = users.find((u) => u.username == req.query.username) 
+      } else {
+        const user = users.find((u) => u.id == req.params.id) 
+      }
       const { username, email, name } = req.body;
       if (username) user.username = username;
       if (email) user.email = email;
