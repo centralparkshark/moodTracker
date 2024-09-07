@@ -28,12 +28,16 @@ router
         title = mood.name
       } else if (req.query.username) {
         let user = users.find((u) => u.username == req.query.username)
-        const usersPosts = journal.filter((j) => j.userId == user.id)
+        if (user) {
+          const usersPosts = journal.filter((j) => j.userId == user.id)
         
         usersPosts.forEach(post => {
           let mood = moods.find((m) => m.id == post.mood.moodId)
           formattedPosts.push({user: user, mood: mood.name.toLowerCase(), post: post})
         });
+        }
+        else next();
+        
       } else {
         journal.forEach(post => {
           let user = users.find((u) => u.id == post.userId)
@@ -90,6 +94,9 @@ router
         res.json({ success: true });
     })
 
+    router.use((req, res, next) => {
+      next(error(404, "Resource Not Found")); // could render 404 page
+    });
         
 
 module.exports = router;

@@ -46,5 +46,7 @@ router
       
     })
 
-
+    router.use((req, res, next) => {
+      next(error(404, "Resource Not Found")); // could render 404 page
+    });
 module.exports = router;

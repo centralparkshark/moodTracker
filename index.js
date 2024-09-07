@@ -57,12 +57,12 @@ app.listen(port, () => {
 // [x] error handling middleware
 // [x] 3 different data categories (eg users, post, comments)
 // [x] reasonable data structuring practices
-// [ ] get routes for all data exposed to client
-// [ ] post routes as appropriate (at least one data category)
+// [x] get routes for all data exposed to client
+// [x] post routes as appropriate (at least one data category)
 // [x] patch/put (at least 1)
 // [x] delete (at least 1)
-// [ ] query parameters for data filtering (at least 1)
-// [ ] route parameters
+// [x] query parameters for data filtering (at least 1)
+// [x] route parameters
 // [ ] adhere to REST
 // [x] at least 1 view using view template and template engine
 // [x] simple css w/ static file using express
@@ -76,5 +76,9 @@ app.listen(port, () => {
 // bonus:
 // [ ] practical usage of regex in route path
 // [ ] use one new third party node package 
+
+// future:
+// [ ] allow custom username
+// [ ] check to make sure username isn't taken 
 
 module.exports = app;
