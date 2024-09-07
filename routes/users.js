@@ -25,8 +25,12 @@ router
         else next();
     })
     .patch((req, res, next) => {
-      const user = users.find((u) => u.id == req.params.id)
-
+      const user = users.find((u) => u.id == req.params.id) 
+      const { username, email, name } = req.body;
+      if (username) user.username = username;
+      if (email) user.email = email;
+      if (name) user.name = name;
+      return res.status(200).json({ success: true, user });
     })
 
 

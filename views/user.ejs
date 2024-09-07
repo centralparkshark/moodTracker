@@ -19,22 +19,30 @@
                 <img src="<%= user.img %>" alt="">
                 <div class="info">
                     <h2>Name: <%= user.name %></h2>
-                    <p>Username: <%= user.username %></p>
+                    <p id="usernameEl">Username: <%= user.username %></p>
                     <p>Email: <%= user.email %></p>
-                    <button class="editInfo" onclick="editUser(<%= user.id %>)"></button>>Edit Info</button>
+                    <button class="editInfo" onclick="editUser(<%= user.id %>)">Edit Info</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
         function editUser(userId) {
+            let newUsername = "thisIsANewUsername"
             fetch(`/users/${userId}`, {
                 method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: newUsername
+                })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // change dom
+                    document.getElementById("usernameEl").innerText = `Username: ${newUsername}`
+                    console.log("success")
                 } else {
                     console.error('Failed to edit user');
                 }
