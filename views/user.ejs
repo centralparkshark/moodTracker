@@ -28,6 +28,7 @@
     </div>
     <script>
         function editUser(userId) {
+            console.log(userId)
             let newUsername = "thisIsANewUsername"
             fetch(`/users/${userId}`, {
                 method: 'PATCH',

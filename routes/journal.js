@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bodyParser = require('body-parser');
 
 let journal = require("../data/journal");
 const moods = require("../data/moods");
@@ -7,37 +8,43 @@ const users = require("../data/users");
 const error = require("../views/error");
 const { route } = require("./moods");
 
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
+
 router
     .route("/")
     .get((req, res, next) => {
-        let formattedPosts = []
+      let formattedPosts = []
+      let title = ""
+      //
+      if (req.query.mood) {
+        let mood = moods.find((m) => m.name.toLowerCase() == req.query.mood)
+        const moodPosts = journal.filter((j) => j.mood.moodId == mood.id)
         
+        moodPosts.forEach(post => {
+          let user = users.find((u) => u.id == post.userId)
+          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), post: post})
+        });
+        title = mood.name
+      } else if (req.query.username) {
+        let user = users.find((u) => u.username == req.query.username)
+        const usersPosts = journal.filter((j) => j.userId == user.id)
+        
+        usersPosts.forEach(post => {
+          let mood = moods.find((m) => m.id == post.mood.moodId)
+          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), post: post})
+        });
+      } else {
         journal.forEach(post => {
           let user = users.find((u) => u.id == post.userId)
           let mood = moods.find((m) => m.id == post.mood.moodId)
           formattedPosts.push({user: user, mood: mood.name.toLowerCase(), post: post})
         });
-
-        if (formattedPosts) res.render("journal", {title: "", items: formattedPosts})
+      }
+        if (formattedPosts) res.render("journal", {title: title, items: formattedPosts})
         else next();
 });
-//   .post((req, res, next) => {
-//     if (req.body.name && req.body.username && req.body.email) {
-//       if (users.find((u) => u.username == req.body.username)) {
-//         next(error(409, "Username Already Taken"));
-//       }
 
-//       const user = {
-//         id: users[users.length - 1].id + 1,
-//         name: req.body.name,
-//         username: req.body.username,
-//         email: req.body.email,
-//       };
-
-//       users.push(user);
-//       res.json(users[users.length - 1]);
-//     } else next(error(400, "Insufficient Data"));
-//   });
 router
   .route('/new')
   .get((req, res) => {
