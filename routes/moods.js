@@ -54,8 +54,7 @@ router
         
         moodPosts.forEach(post => {
           let user = users.find((u) => u.id == post.userId)
-          let note = post.mood.note;
-          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), note: note})
+          formattedPosts.push({user: user, mood: mood.name.toLowerCase(), post: post})
         });
 
         if (formattedPosts) res.render("journal", {title: mood.name, items: formattedPosts})
