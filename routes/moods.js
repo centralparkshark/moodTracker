@@ -10,16 +10,16 @@ const error = require("../views/error");
 router
   .route("/")
   .get((req, res) => {
-    const links = [
-      {
-        href: "moods/:id",
-        rel: ":id",
+    const links = moods.map(mood => ({
+        href: `moods/${mood.id}`,
+        rel: "moods/",
         type: "GET",
-      },
-    ];
+    }));
+
     const options = {
       title: "Moods",
       items: moods,
+      _links: links,
     };
     res.render("data", options)
   })
@@ -36,12 +36,22 @@ router
           formattedPosts.push({user: user, mood: mood.name.toLowerCase(), post: post})
         });
 
-        if (formattedPosts) res.render("journal", {title: mood.name, items: formattedPosts})
-        else next();
+        if (formattedPosts.length > 0) {
+          const links = {
+            self: {href: `/moods/${mood.id}`, method: "GET"}
+          }
+          res.render("journal", {title: mood.name, items: formattedPosts, _links:links,})
+
+        } else next();
 });
 
 router.use((req, res, next) => {
   next(error(404, "Resource Not Found")); // could render 404 page
+});
+
+router.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({ error: err.message });
 });
 
 module.exports = router;
