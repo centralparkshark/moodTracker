@@ -12,7 +12,7 @@ router
   .get((req, res) => {
     const links = moods.map(mood => ({
         href: `moods/${mood.id}`,
-        rel: "moods/",
+        rel: "self",
         type: "GET",
     }));
 
@@ -38,7 +38,8 @@ router
 
         if (formattedPosts.length > 0) {
           const links = {
-            self: {href: `/moods/${mood.id}`, method: "GET"}
+            self: {href: `/moods/${mood.id}`, method: "GET"},
+            journal: { href: `/journal?mood=${mood.name.toLowerCase()}`, method: "GET" }
           }
           res.render("journal", {title: mood.name, items: formattedPosts, _links:links,})
 

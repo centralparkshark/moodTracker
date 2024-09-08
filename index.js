@@ -24,6 +24,11 @@ app.use(bodyParser.json({ extended: true }));
 
 app.use(express.static(__dirname + '/public'));
 
+app.use((req, res, next) => {
+    console.log(`Request Method: ${req.method}, Request URL: ${req.url}`);
+    next();
+  });
+  
 app.get("/", (req, res) => {
     const options = {
         title: "Home",
@@ -48,12 +53,13 @@ app.use((err, req, res, next) => {
         res.json({ error: err.message });
       });
 
+
 app.listen(port, () => {
     console.log("Server started.")
 })
 
 // TO-DO:
-// [ ] two pieces of custom middleware
+// [x] two pieces of custom middleware
 // [x] error handling middleware
 // [x] 3 different data categories (eg users, post, comments)
 // [x] reasonable data structuring practices
@@ -63,7 +69,7 @@ app.listen(port, () => {
 // [x] delete (at least 1)
 // [x] query parameters for data filtering (at least 1)
 // [x] route parameters
-// [ ] adhere to REST
+// [x] adhere to REST
 // [x] at least 1 view using view template and template engine
 // [x] simple css w/ static file using express
 // [x] form that allows interaction 
@@ -80,5 +86,6 @@ app.listen(port, () => {
 // future:
 // [ ] allow custom username
 // [ ] check to make sure username isn't taken 
+// [ ] delete any hateoas stuff probably or fix it idk
 
 module.exports = app;

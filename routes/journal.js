@@ -10,6 +10,7 @@ const error = require("../views/error");
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
+
 const formatPosts = (posts) => {
   return posts.map(post => {
     let user = users.find((u) => u.id == post.userId);
@@ -83,7 +84,7 @@ router
     res.redirect('/journal')
   })
 
-  router
+router
     .route("/:postId")
     .get((req, res, next) => {
         let post = journal.find((p) => p.id == req.params.postId)
@@ -122,6 +123,7 @@ router
       res.status(err.status || 500);
       res.json({ error: err.message });
     });
+
 
 
 module.exports = router;
